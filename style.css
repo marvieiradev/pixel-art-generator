@@ -20,6 +20,8 @@ body {
     border-radius: 8px;
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 label {
@@ -79,7 +81,14 @@ input[type="color"]::-moz-color-swatch {
 }
 
 .container {
-    margin: 0 auto;
+    background-color: #fff;
+}
+
+#download {
+    margin-top: 20px;
+    width: 200px;
+    height: 40px;
+    display: none;
 }
 
 @media only screen and (max-width: 768px) {

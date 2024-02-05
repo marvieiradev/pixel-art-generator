@@ -8,6 +8,7 @@ let eraseBtn = document.getElementById("erase-btn");
 let paintBtn = document.getElementById("paint-btn");
 let widthValue = document.getElementById("width-value");
 let heightValue = document.getElementById("height-value");
+let downloadImg = document.getElementById("download");
 
 let events = {
     mouse: {
@@ -43,6 +44,7 @@ isTouchDevice();
 gridButton.addEventListener("click", () => {
     container.innerHTML = "";
     let count = 0;
+    downloadImg.style.display = "block";
     for (let i = 0; i < gridHeight.value; i++) {
         count += 2;
         let div = document.createElement("div");
@@ -93,6 +95,7 @@ function checker(elemntId) {
 
 clearGridButton.addEventListener("click", () => {
     container.innerHTML = "";
+    downloadImg.style.display = "none";
 });
 
 eraseBtn.addEventListener("click", () => {
@@ -110,6 +113,22 @@ gridWidth.addEventListener("input", () => {
 gridHeight.addEventListener("input", () => {
     heightValue.innerHTML = gridHeight.value < 9 ? `0${gridHeight.value}` : gridHeight.value;
 });
+
+function downloadImage(imageName) {
+    domtoimage.toJpeg(document.querySelector('.container'),
+        { quality: 0.99 },
+        { style: "transform:(scale(50,50))" })
+        .then(function (dataUrl) {
+            var link = document.createElement('a');
+            link.download = imageName;
+            link.href = dataUrl;
+            link.click();
+        });
+}
+
+downloadImg.addEventListener("click", () => {
+    downloadImage('pixel-image.jpg');
+})
 
 window.onload = () => {
     gridHeight.value = 0;
